@@ -1,0 +1,163 @@
+{
+  "users": [
+    { "id": "usr_1", "name": "Maya Chen", "role": "Owner", "email": "maya@northstar.example" },
+    { "id": "usr_2", "name": "Theo Grant", "role": "Support lead", "email": "theo@northstar.example" },
+    { "id": "usr_3", "name": "Priya Shah", "role": "Operations", "email": "priya@northstar.example" }
+  ],
+  "businesses": [
+    { "id": "shop", "name": "Harbor & Pine", "type": "E-commerce", "domain": "harborpine.example", "accent": "#008c7a" },
+    { "id": "saas", "name": "Northstar CRM", "type": "SaaS startup", "domain": "northstarcrm.example", "accent": "#087ea4" },
+    { "id": "hotel", "name": "Tidehouse Stay", "type": "Hotel", "domain": "tidehouse.example", "accent": "#2c7a5d" }
+  ],
+  "plans": [
+    {
+      "id": "starter",
+      "name": "Launch",
+      "price": "$29",
+      "credits": 3000,
+      "agents": 1,
+      "members": 1,
+      "actions": 3,
+      "sources": "25 URLs or 20 MB docs",
+      "features": ["Widget customization", "Lead capture", "Human handoff", "Basic review logs"]
+    },
+    {
+      "id": "growth",
+      "name": "Growth",
+      "price": "$79",
+      "credits": 12000,
+      "agents": 5,
+      "members": 6,
+      "actions": 20,
+      "sources": "250 URLs or 250 MB docs",
+      "features": ["Remove branding", "Advanced analytics", "Calendly CTA", "Priority crawling"]
+    },
+    {
+      "id": "scale",
+      "name": "Scale",
+      "price": "$189",
+      "credits": 50000,
+      "agents": 15,
+      "members": 25,
+      "actions": 100,
+      "sources": "Unlimited URLs or 2 GB docs",
+      "features": ["Multi-brand workspaces", "SAML-ready teams", "Custom model routing", "Export API"]
+    }
+  ],
+  "agents": [
+    {
+      "id": "agent_shop",
+      "businessId": "shop",
+      "name": "Harbor Helper",
+      "website": "harborpine.example",
+      "model": "GPT-4.1 mini",
+      "status": "Live",
+      "sources": 42,
+      "theme": "#008c7a",
+      "members": ["Maya Chen", "Theo Grant"],
+      "greeting": "Hi, I can help with sizing, shipping, and returns."
+    },
+    {
+      "id": "agent_saas",
+      "businessId": "saas",
+      "name": "Northstar Guide",
+      "website": "northstarcrm.example",
+      "model": "Claude 3.5 Sonnet",
+      "status": "Training",
+      "sources": 96,
+      "theme": "#087ea4",
+      "members": ["Theo Grant", "Priya Shah"],
+      "greeting": "Ask me about plans, onboarding, or account setup."
+    },
+    {
+      "id": "agent_hotel",
+      "businessId": "hotel",
+      "name": "Tidehouse Concierge",
+      "website": "tidehouse.example",
+      "model": "Gemini 1.5 Pro",
+      "status": "Live",
+      "sources": 31,
+      "theme": "#2c7a5d",
+      "members": ["Maya Chen"],
+      "greeting": "I can help with rooms, check-in, parking, and local tips."
+    }
+  ],
+  "knowledgeSources": [
+    { "id": "src_1", "businessId": "shop", "type": "URLs", "title": "Shipping and returns pages", "status": "Synced", "lastSynced": "Today, 9:12 AM" },
+    { "id": "src_2", "businessId": "shop", "type": "documents", "title": "Spring catalog FAQ.pdf", "status": "Processing", "lastSynced": "Today, 8:44 AM" },
+    { "id": "src_3", "businessId": "saas", "type": "URLs", "title": "Docs, pricing, onboarding guide", "status": "Synced", "lastSynced": "Yesterday, 6:18 PM" },
+    { "id": "src_4", "businessId": "hotel", "type": "raw", "title": "Breakfast, late checkout, and pet policy", "status": "Synced", "lastSynced": "Mon, 2:30 PM" },
+    { "id": "src_5", "businessId": "hotel", "type": "documents", "title": "Guest services handbook.docx", "status": "Needs review", "lastSynced": "Fri, 11:04 AM" }
+  ],
+  "conversations": [
+    {
+      "id": "conv_1042",
+      "businessId": "shop",
+      "agent": "Harbor Helper",
+      "customer": "Ava Brooks",
+      "email": "ava@example.com",
+      "status": "Handoff",
+      "date": "Today",
+      "leadScore": "Warm",
+      "messages": [
+        { "from": "user", "body": "Can I exchange a jacket for a different size?" },
+        { "from": "ai", "body": "Yes. Exchanges are free within 30 days if the item is unworn. I can send the returns link." },
+        { "from": "user", "body": "I also need it before Friday." },
+        { "from": "ai", "body": "A specialist should check inventory for the fastest option. I can hand this over with the order notes." }
+      ]
+    },
+    {
+      "id": "conv_1043",
+      "businessId": "saas",
+      "agent": "Northstar Guide",
+      "customer": "Leo Martin",
+      "email": "leo@studio.example",
+      "status": "Resolved",
+      "date": "Yesterday",
+      "leadScore": "Hot",
+      "messages": [
+        { "from": "user", "body": "Does Growth include multiple workspaces?" },
+        { "from": "ai", "body": "Growth includes five agents and six team seats. Separate workspaces are available on Scale." },
+        { "from": "user", "body": "Can I book a demo?" },
+        { "from": "ai", "body": "Absolutely. I can open a booking link and attach this conversation to your lead profile." }
+      ]
+    },
+    {
+      "id": "conv_1044",
+      "businessId": "hotel",
+      "agent": "Tidehouse Concierge",
+      "customer": "Noah Patel",
+      "email": "noah@example.com",
+      "status": "Open",
+      "date": "Today",
+      "leadScore": "New",
+      "messages": [
+        { "from": "user", "body": "Can I check in after midnight?" },
+        { "from": "ai", "body": "Yes. Late check-in is available. The front desk sends a lockbox code before arrival." }
+      ]
+    }
+  ],
+  "leads": [
+    { "id": "lead_1", "name": "Ava Brooks", "email": "ava@example.com", "conversation": "conv_1042", "status": "Needs follow-up", "booked": false },
+    { "id": "lead_2", "name": "Leo Martin", "email": "leo@studio.example", "conversation": "conv_1043", "status": "Qualified", "booked": true },
+    { "id": "lead_3", "name": "Noah Patel", "email": "noah@example.com", "conversation": "conv_1044", "status": "New", "booked": false }
+  ],
+  "analytics": {
+    "kpis": { "conversationsToday": 147, "resolutionRate": 78, "handoffRate": 14, "capturedLeads": 23 },
+    "conversationDays": [41, 52, 48, 63, 71, 88, 96],
+    "resolvedVsHandoff": [78, 14, 8],
+    "activity": [
+      "Harbor Helper synced 18 updated return-policy pages.",
+      "Northstar Guide captured a qualified demo request.",
+      "Tidehouse Concierge resolved a late check-in question.",
+      "Theo added an internal note to conversation conv_1042."
+    ]
+  },
+  "widgetReplies": {
+    "shipping": "Most shipping questions are answered from your policy pages. For Harbor & Pine, standard delivery is 3-5 business days and exchanges are free within 30 days.",
+    "pricing": "RelayDesk plans are based on monthly message credits, agents, and team seats. A longer conversation can use multiple credits across user and AI replies.",
+    "human": "I can escalate this to a human teammate and include the full transcript so you do not need to repeat yourself.",
+    "booking": "Here is a demo booking option. In a live setup this can connect to Calendly or your scheduling tool.",
+    "default": "I found a close match in the demo knowledge base. You can train RelayDesk on URLs, documents, and raw text so answers stay grounded in your business."
+  }
+}
