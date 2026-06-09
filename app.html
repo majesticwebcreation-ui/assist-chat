@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="RelayDesk static dashboard demo for AI support agents, knowledge sources, conversations, leads, widget settings, and billing.">
+    <title>RelayDesk Dashboard</title>
+    <link rel="icon" href="assets/logo.svg">
+    <link rel="stylesheet" href="css/styles.css">
+  </head>
+  <body class="app-body">
+    <div class="app-shell">
+      <aside class="sidebar">
+        <a class="brand" href="index.html"><img src="assets/logo.svg" alt="RelayDesk"></a>
+        <select id="businessSelect" class="business-select" aria-label="Switch demo business"></select>
+        <nav class="sidebar-nav" aria-label="Dashboard navigation">
+          <button class="sidebar-link active" data-view="overview">Overview</button>
+          <button class="sidebar-link" data-view="agents">Agents</button>
+          <button class="sidebar-link" data-view="knowledge">Knowledge Base</button>
+          <button class="sidebar-link" data-view="conversations">Conversations</button>
+          <button class="sidebar-link" data-view="leads">Leads</button>
+          <button class="sidebar-link" data-view="widget">Widget Customizer</button>
+          <button class="sidebar-link" data-view="settings">Settings/Billing</button>
+        </nav>
+        <div class="sidebar-footer">
+          <div class="checklist">
+            <h3>Onboarding checklist</h3>
+            <label><input type="checkbox" checked> Create agent</label>
+            <label><input type="checkbox" checked> Add sources</label>
+            <label><input type="checkbox"> Customize widget</label>
+            <label><input type="checkbox"> Install code</label>
+            <label><input type="checkbox"> Test conversation</label>
+          </div>
+          <a class="btn" href="index.html">Marketing page</a>
+        </div>
+      </aside>
+      <main class="app-main">
+        <header class="app-header">
+          <div>
+            <h1 id="viewTitle">Overview</h1>
+            <p class="muted">Static-first demo workspace with realistic support data.</p>
+          </div>
+          <div class="header-tools">
+            <input id="globalSearch" class="search" type="search" placeholder="Search conversations" aria-label="Search conversations">
+            <button class="btn icon theme-toggle" type="button" aria-label="Toggle theme">☼</button>
+            <button class="btn accent" data-toast="Invite link copied.">Invite teammate</button>
+          </div>
+        </header>
+
+        <section class="view active" id="overviewView">
+          <div id="kpiGrid" class="kpi-grid"></div>
+          <div class="dashboard-grid">
+            <article class="app-card"><div class="toolbar"><h2>Conversations by day</h2><span class="badge">Last 7 days</span></div><div id="conversationChart" class="chart-bars"></div></article>
+            <article class="app-card"><div class="toolbar"><h2>Resolved vs handoff</h2><span class="badge blue">AI quality</span></div><div id="resolutionChart" class="chart-bars"></div></article>
+          </div>
+          <article class="app-card" style="margin-top:16px"><div class="toolbar"><h2>Recent activity</h2><button class="btn small" data-toast="Activity refreshed.">Refresh</button></div><div id="activityList" class="activity-list"></div></article>
+        </section>
+
+        <section class="view" id="agentsView">
+          <div class="toolbar"><div><h2>Agents</h2><p class="muted">Create, edit, and route support agents by brand or site.</p></div><button class="btn accent" id="addAgent">Create agent</button></div>
+          <div id="agentGrid" class="agent-grid"></div>
+        </section>
+
+        <section class="view" id="knowledgeView">
+          <div class="toolbar"><div><h2>Knowledge Base</h2><p class="muted">Plan limit: 250 URLs or 250 MB documents on Growth.</p></div><button class="btn accent" id="addSource">Add source</button></div>
+          <div class="tabs" role="tablist" aria-label="Source type">
+            <button class="tab source-tab active" data-source-tab="URLs">URLs</button>
+            <button class="tab source-tab" data-source-tab="documents">Documents</button>
+            <button class="tab source-tab" data-source-tab="raw">Raw text</button>
+          </div>
+          <div id="sourceList" class="source-list" style="margin-top:16px"></div>
+        </section>
+
+        <section class="view" id="conversationsView">
+          <div class="toolbar"><div><h2>Conversations</h2><p class="muted">Filter by agent, status, date, and customer intent.</p></div><button class="btn" data-toast="Date filter applied.">Today</button></div>
+          <div class="inbox">
+            <article class="app-card conversation-list" id="conversationList" aria-label="Conversation list"></article>
+            <article class="app-card thread"><div class="toolbar" style="padding:16px 18px 0"><h2 id="threadTitle">Conversation</h2><span class="badge warn">Review</span></div><div id="messageList" class="messages"></div><div style="padding:0 18px 18px"><label for="internalNote"><strong>Internal note</strong></label><textarea id="internalNote" placeholder="Add a teammate-only note"></textarea></div></article>
+            <aside class="app-card lead-panel" id="leadPanel"></aside>
+          </div>
+        </section>
+
+        <section class="view" id="leadsView">
+          <div class="toolbar"><div><h2>Captured leads</h2><p class="muted">Exportable contacts collected from support conversations.</p></div><button class="btn accent" id="exportLeads">Export CSV</button></div>
+          <article class="app-card">
+            <table class="table">
+              <thead><tr><th>Name</th><th>Email</th><th>Conversation</th><th>Status</th><th>Meeting</th></tr></thead>
+              <tbody id="leadTableBody"></tbody>
+            </table>
+          </article>
+        </section>
+
+        <section class="view" id="widgetView">
+          <div class="toolbar"><div><h2>Widget Customizer</h2><p class="muted">Changes update the live preview and demo launcher.</p></div><button class="btn accent" id="saveWidget">Save widget</button></div>
+          <div class="customizer-grid">
+            <article class="app-card form-grid">
+              <div class="field"><label for="widgetColor">Widget color</label><input id="widgetColor" type="color"></div>
+              <div class="field"><label for="widgetName">Agent name</label><input id="widgetName" type="text"></div>
+              <div class="field"><label for="widgetGreeting">Greeting text</label><input id="widgetGreeting" type="text"></div>
+              <div class="field"><label for="launcherPosition">Launcher position</label><select id="launcherPosition"><option>Right</option><option>Left</option></select></div>
+              <div class="switch-row"><span>Dark mode preview</span><input type="checkbox" aria-label="Enable dark widget preview"></div>
+              <div class="switch-row"><span>Remove branding</span><input type="checkbox" checked aria-label="Remove RelayDesk branding"></div>
+            </article>
+            <article class="app-card">
+              <div class="phone-preview">
+                <div class="chat-panel open" style="position:static; width:100%; max-height:none; display:grid">
+                  <div class="chat-head"><strong id="widgetPreviewName">Harbor Helper</strong><span>Online</span></div>
+                  <div class="chat-log"><div class="bubble" id="widgetPreviewGreeting">Hi, I can help with sizing, shipping, and returns.</div><div class="bubble user">Can you help with returns?</div><div class="bubble">Yes. I can answer from your return policy or hand this to a teammate.</div></div>
+                </div>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="view" id="settingsView">
+          <div class="split-grid">
+            <article class="app-card" id="billingCard"></article>
+            <article class="app-card"><h2>Embed code</h2><p class="muted">Paste this into your site before the closing body tag.</p><pre class="code-block">&lt;script src="https://yourdomain.com/widget.js" data-agent="agent_123"&gt;&lt;/script&gt;</pre><button class="btn" data-toast="Embed snippet copied.">Copy snippet</button></article>
+          </div>
+          <article class="app-card" style="margin-top:16px"><h2>Coming soon channels</h2><div class="integrations-grid cards-grid"><div class="integration-card"><strong>WhatsApp</strong><span class="badge warn">Coming soon</span></div><div class="integration-card"><strong>Instagram</strong><span class="badge warn">Coming soon</span></div><div class="integration-card"><strong>Telegram</strong><span class="badge warn">Coming soon</span></div><div class="integration-card"><strong>Messenger</strong><span class="badge warn">Coming soon</span></div></div></article>
+        </section>
+      </main>
+    </div>
+
+    <div class="chat-widget" aria-live="polite">
+      <div class="chat-panel" id="chatPanel">
+        <div class="chat-head"><strong id="chatTitle">Harbor Helper</strong><button class="btn small" id="chatClose" type="button">Close</button></div>
+        <div class="chat-log" id="chatLog"><div class="bubble" id="chatWelcome">Hi, I can help with sizing, shipping, and returns.</div></div>
+        <div>
+          <div class="suggestions"><button type="button">Shipping policy</button><button type="button">Talk to human</button><button type="button">Book demo</button></div>
+          <form class="chat-form" id="chatForm"><input id="chatInput" type="text" autocomplete="off" placeholder="Ask a question" aria-label="Ask the support agent"><button class="btn accent" type="submit">Send</button></form>
+        </div>
+      </div>
+      <button class="chat-launcher" id="chatLauncher" type="button" aria-label="Open support chat">R</button>
+    </div>
+
+    <div class="modal-backdrop" id="modal" aria-hidden="true" role="dialog" aria-modal="true"><div class="modal-card" id="modalContent"></div></div>
+    <div class="toast-stack" id="toastStack" aria-live="polite"></div>
+    <script src="js/main.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>
